@@ -5,8 +5,7 @@ grocer
 
 I like using [https://dataset.readthedocs.io/en/latest/](dataset) with
 [https://www.sqlite.org/index.html](SQLite) because I am lazy and the interface
-is convenient. However, I found that I really like the simplicity, but I really
-want _some_ concurrent scaling.
+is convenient. I really like the simplicity, but I also want _some_ concurrency.
 
 When I need to write concurrently, I have reached for MongoDB because it scales
 well. However, I need to install and run the MongoDB server which can be a
@@ -19,6 +18,12 @@ locking mechanism to allow for concurrent access? Interested? Then it is time to
 become a grocer and open your own store.
 
 ## Opening your own store
+
+Import grocer:
+
+```python
+import grocer
+```
 
 Initialize a `Store`:
 
