@@ -4,7 +4,7 @@ import pathlib
 
 
 @pytest.fixture()
-def ini_pathlib_dir(request):
+def ini_a_dir(request):
     cwd = pathlib.Path.cwd()
     a_dir = pathlib.Path.joinpath(cwd, "tests", "a_dir")
     a_dir.mkdir()
@@ -18,7 +18,7 @@ def ini_pathlib_dir(request):
 
 
 @pytest.fixture()
-def ini_pathlib_file(request):
+def ini_a_file(request):
     cwd = pathlib.Path.cwd()
     a_file = pathlib.Path.joinpath(cwd, "tests", "a_file")
     a_file.touch()
@@ -61,14 +61,14 @@ def test_store_init_works_when_given_dir_doesnt():
     a_dir.rmdir()
 
 
-def test_store_init_works_when_given_dir_exists(ini_pathlib_dir):
-    a = grocer.Store(ini_pathlib_dir)
+def test_store_init_works_when_given_dir_exists(ini_a_dir):
+    a = grocer.Store(ini_a_dir)
     assert a._store_path.exists()
 
 
-def test_store_init_raises_when_given_file(ini_pathlib_file):
+def test_store_init_raises_when_given_file(ini_a_file):
     with pytest.raises(NotADirectoryError):
-        grocer.Store(ini_pathlib_file)
+        grocer.Store(ini_a_file)
 
 
 def test_store_access_key_exists(ini_aisle):
@@ -81,7 +81,15 @@ def test_store_access_key_doesnt(ini_aisle):
         ini_aisle["apple"]
 
 
-def test_store_create_sku(ini_aisle, ini_apple_path):
-    d = {"price": "2.0"}
-    ini_aisle["apple"] = d
-    assert d == ini_aisle["apple"]
+def test_store_create_sku_strings(ini_aisle, ini_apple_path):
+    dict_in = {"price": "2.0"}
+    ini_aisle["apple"] = dict_in
+    dict_out = ini_aisle["apple"]
+    assert dict_in == dict_out
+
+
+def test_store_create_sku_with_non_string(ini_aisle, ini_apple_path):
+    dict_in = {"price": 2.0}
+    ini_aisle["apple"] = dict_in
+    dict_out = ini_aisle["apple"]
+    assert dict_in == dict_out
