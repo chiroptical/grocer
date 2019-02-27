@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "Flat-file JSON store designed for concurrent write access"
 authors = ["Barry Moore <moore0557@gmail.com>"]
 license = "MIT"
+packages = [
+    { include = "grocer" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"

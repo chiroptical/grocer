@@ -22,7 +22,7 @@ become a grocer and open your own store.
 Import grocer:
 
 ```python
-import grocer
+from grocer import grocer
 ```
 
 Initialize a `Store`:
